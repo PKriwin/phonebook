@@ -7,5 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Paul Kriwin",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^17.6.0",
+    "joi": "^13.7.0",
+    "lodash": "^4.17.11"
+  }
 }
