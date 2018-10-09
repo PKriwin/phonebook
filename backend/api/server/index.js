@@ -19,7 +19,7 @@ exports.start = async () => {
 
 async function initServer(server) {
 
-  _.forEach(routes, r => server.route(r))
+  await server.register(routes);
 }
 
 async function startServer(server) {
