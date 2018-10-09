@@ -2,18 +2,17 @@
 
 const _ = require('lodash')
 
-module.exports.create = (sequelize) {
+module.exports.create = (sequelize, datatypes) => {
 
-  const personModel = createSequelizeModel(sequelize)
+  const personModel = createSequelizeModel(sequelize, datatypes)
 
   return {
 
-      search:   getModelSearchMethod(personModel, sequelize),
-      findById: getModelFindByIdMethod(personModel),
-      update:   getModelUpdateMethod(personModel),
-      create:   getModelCreateMethod(personModel),
-      delete:   getModelDeleteMethod(personModel)
-    }
+    search:   getModelSearchMethod(personModel, sequelize),
+    findById: getModelFindByIdMethod(personModel),
+    update:   getModelUpdateMethod(personModel),
+    create:   getModelCreateMethod(personModel),
+    delete:   getModelDeleteMethod(personModel)
   }
 }
 
@@ -21,7 +20,7 @@ function getModelSearchMethod(personModel, sequelize) {
 
   return async (fieldsAndValues) => {
 
-    const Op = Sequelize.Op;
+    const Op = sequelize.Op;
     const where = { [Op.or]: [] }
 
     _.forOwn(fieldsAndValues, (value, key) => {
@@ -36,7 +35,7 @@ function getModelFindByIdMethod(personModel) {
 
   return async (id) => {
 
-    return personModel.findById(id).get({plain: true})
+    return await (personModel.findById(id))
   }
 }
 
@@ -48,7 +47,7 @@ function getModelUpdateMethod(personModel) {
 
     _.forOwn(values, (value, key) => modelToUpdate[key] = value)
 
-    await (modelToPatch.save())
+    await (modelToUpdate.save())
   }
 }
 
@@ -56,7 +55,7 @@ function getModelCreateMethod(personModel) {
 
   return async(values) => {
 
-    await personModel.insert(values)
+    await personModel.create(values)
   }
 }
 
@@ -67,25 +66,25 @@ function getModelDeleteMethod(personModel) {
     await personModel.destroy({
       where: {
         id
-      })
+      }
     })
   }
 }
 
-function createSequelizeModel(sequelize) {
+function createSequelizeModel(sequelize, datatypes) {
 
   return sequelize.define('person', {
 
       firstname : {
-          type: sequelize.STRING,
+          type: datatypes.TEXT,
           allowNull: false
       },
       lastname: {
-          type: sequelize.STRING,
+          type: datatypes.TEXT,
           allowNull: false,
       },
       telephone: {
-          type: sequelize.STRING,
+          type: datatypes.TEXT,
           allowNull: false
       }
   }, {

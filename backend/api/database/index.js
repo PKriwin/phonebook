@@ -1,9 +1,7 @@
 'use strict'
 
-'use strict'
-
 const path      = require("path")
-const dbAdapter = require((__dirname), 'sequelizeDbAdapter'))
+const dbAdapter = require(path.join(__dirname, 'sequelizeDbAdapter'))
 
 module.exports = {
     name: 'dbAdapter',

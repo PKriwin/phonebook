@@ -1,3 +1,3 @@
 'use strict'
 
-exports.getHelloWorld = (request, h) =>  h.response({helloWorld: 'Hello, world!'})
+exports.getHelloWorld = async (request, h) => h.response({helloWorld: 'Hello, world!'})
