@@ -1,0 +1,37 @@
+'use strict';
+
+const path   = require('path')
+const routes = require(path.join(path.dirname(__dirname), 'routes'))
+const Hapi   = require('hapi')
+const _      = require('lodash')
+
+
+exports.start = async () => {
+
+  const server = Hapi.server({
+      port: 3000,
+      host: 'localhost'
+  })
+
+  await initServer(server)
+  await startServer(server)
+}
+
+async function initServer(server) {
+
+  _.forEach(routes, r => server.route(r))
+}
+
+async function startServer(server) {
+
+  try {
+
+    server.start()
+    console.log(`Server running at: ${server.info.uri}`);
+  }
+  catch(err) {
+
+    console.log(err);
+    process.exit(1);
+  }
+}
