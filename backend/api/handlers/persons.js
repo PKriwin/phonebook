@@ -34,7 +34,7 @@ exports.updatePerson = {
         telephone: Joi.string().regex(/\+\d{2,}\s\d{2,}\s\d{6,}/)
     }).or('firstname', 'lastname', 'telephone');
   },
-  handler:  async (request, h) => { 
+  handler:  async (request, h) => {
 
     const personModel = request.server.app.dbAdapter.models.person
     const personToUpdate = await personModel.findById(request.params.id)
@@ -54,9 +54,21 @@ exports.updatePerson = {
   }
 }
 
-exports.searchPerson = async (request, h) => {
+exports.searchPerson = {
 
+  validate: {
+    query: Joi.object().keys({
+        firstname: Joi.string(),
+        lastname: Joi.string(),
+        telephone: Joi.string()
+    }).or('firstname', 'lastname', 'telephone');
+  },
+  handler:  async (request, h) => {
 
+    const personModel = request.server.app.dbAdapter.models.person
+
+    return h.response(await personModel.search(request.query))
+  }
 }
 
 exports.createPerson = async (request, h) => {
