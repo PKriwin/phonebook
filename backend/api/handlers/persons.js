@@ -67,7 +67,7 @@ exports.searchPerson = {
 
     const personModel = request.server.app.dbAdapter.models.person
 
-    return h.response(await personModel.search(request.query))
+    return h.response(await personModel.search(request.query)).code(200)
   }
 }
 

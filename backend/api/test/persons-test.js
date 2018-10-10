@@ -28,7 +28,7 @@ describe(' --- Person resource --- ', () => {
 
   describe('GET: /persons/{id}', () => {
 
-    it ('Should return 204 - existing person', async () => {
+    it ('Should return 200 - existing person', async () => {
 
       await personModel.flush()
 
@@ -62,16 +62,57 @@ describe(' --- Person resource --- ', () => {
 
   describe('GET: /persons/search', () => {
 
-    it ('Should return 204 - matching search', async () => {
+    it ('Should return 200 - matching search', async () => {
 
+      await personModel.flush()
+
+      await personModel.create({
+        id: 1,
+        firstname: 'john',
+        lastname: 'smith',
+        telephone: '+32 34 654332'
+      })
+      await personModel.create({
+        id: 2,
+        firstname: 'tom',
+        lastname: 'henry',
+        telephone: '+32 34 654372'
+      })
+      await personModel.create({
+        id: 3,
+        firstname: 'janice',
+        lastname: 'jones',
+        telephone: '+33 34 654372'
+      })
+
+      const req = { method: 'GET', url: '/persons/search?firstname=j&telephone=33' }
+      const resp = await testServer.inject(req)
+      const payload = JSON.parse(resp.payload || {})
+
+      expect(resp.statusCode).to.equal(200)
+      expect(payload.length).to.equal(2)
     })
 
-    it ('Should return 204 - unmatching search', async () => {
+    it ('Should return 200 - unmatching search', async () => {
 
+      await personModel.flush()
+
+      const req = { method: 'GET', url: '/persons/search?firstname=j' }
+      const resp = await testServer.inject(req)
+      const payload = JSON.parse(resp.payload || {})
+
+      expect(resp.statusCode).to.equal(200)
+      expect(payload.length).to.equal(0)
     })
 
-    it ('Should return 404 - invalid query param', async () => {
+    it ('Should return 400 - invalid query param', async () => {
 
+      await personModel.flush()
+
+      const req = { method: 'GET', url: '/persons/search?email=jo' }
+      const resp = await testServer.inject(req)
+
+      expect(resp.statusCode).to.equal(400)
     })
   })
 
@@ -141,7 +182,7 @@ describe(' --- Person resource --- ', () => {
       expect(records.length).to.equal(0)
     })
 
-    it ('Should return 400 - invalid new person (malformed telephone number)', async () => {
+    it ('Should return 400 - invalid new person (erroneous telephone number)', async () => {
 
       await personModel.flush()
 
