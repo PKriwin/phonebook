@@ -34,7 +34,7 @@ exports.updatePerson = {
         telephone: Joi.string().regex(/\+\d{2,}\s\d{2,}\s\d{6,}/)
     }).or('firstname', 'lastname', 'telephone');
   },
-  handler:  async (request, h) => {
+  handler:  async (request, h) => { 
 
     const personModel = request.server.app.dbAdapter.models.person
     const personToUpdate = await personModel.findById(request.params.id)
