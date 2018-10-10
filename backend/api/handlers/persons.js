@@ -7,7 +7,7 @@ exports.getPersonById = {
 
   validate: {
     params: {
-      id: Joi.number().integer().positive().required().description('id of the person')
+      id: Joi.number().integer().positive().required()
     }
   },
   handler:  async (request, h) => {
@@ -73,4 +73,20 @@ exports.searchPerson = {
 
 exports.createPerson = async (request, h) => {
 
+  validate: {
+
+    payload: {
+        firstname: Joi.string().required(),
+        lastname: Joi.string().required(),
+        telephone: Joi.string().regex(/\+\d{2,}\s\d{2,}\s\d{6,}/).required()
+      }
+    },
+    handler:  async (request, h) => {
+
+      const personModel = request.server.app.dbAdapter.models.person
+
+      await personModel.create(request.payload)
+
+      return h.response().code(200)
+    }
 }
