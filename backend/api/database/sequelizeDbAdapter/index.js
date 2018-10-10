@@ -27,10 +27,14 @@ const sequelizeInstance = new Sequelize(
 const personModel = require(path.join(__dirname, 'models', 'person.js'))
                         .create(sequelizeInstance, Sequelize.DataTypes)
 
+const dbAdapter = { models: { person: personModel }}
+
 module.exports = {
 
-  models: {
+    name: 'dbAdapter',
+    version: '1.0.0',
+    register: async function (server, options) {
 
-    person: personModel
-  }
+      server.app.dbAdapter = dbAdapter
+    }
 }

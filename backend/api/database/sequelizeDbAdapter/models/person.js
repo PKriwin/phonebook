@@ -16,6 +16,28 @@ module.exports.create = (sequelize, datatypes) => {
   }
 }
 
+function createSequelizeModel(sequelize, datatypes) {
+
+  return sequelize.define('person', {
+
+      firstname : {
+          type: datatypes.TEXT,
+          allowNull: false
+      },
+      lastname: {
+          type: datatypes.TEXT,
+          allowNull: false,
+      },
+      telephone: {
+          type: datatypes.TEXT,
+          allowNull: false
+      }
+  }, {
+      tableName: 'person',
+      freezeTableName: true
+  })
+}
+
 function getModelSearchMethod(personModel, sequelize) {
 
   return async (fieldsAndValues) => {
@@ -69,26 +91,4 @@ function getModelDeleteMethod(personModel) {
       }
     })
   }
-}
-
-function createSequelizeModel(sequelize, datatypes) {
-
-  return sequelize.define('person', {
-
-      firstname : {
-          type: datatypes.TEXT,
-          allowNull: false
-      },
-      lastname: {
-          type: datatypes.TEXT,
-          allowNull: false,
-      },
-      telephone: {
-          type: datatypes.TEXT,
-          allowNull: false
-      }
-  }, {
-      tableName: 'person',
-      freezeTableName: true
-  })
 }

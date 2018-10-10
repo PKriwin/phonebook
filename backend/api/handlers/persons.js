@@ -32,7 +32,7 @@ exports.updatePerson = {
         firstname: Joi.string(),
         lastname: Joi.string(),
         telephone: Joi.string().regex(/\+\d{2,}\s\d{2,}\s\d{6,}/)
-    }).or('firstname', 'lastname', 'telephone');
+    }).or('firstname', 'lastname', 'telephone')
   },
   handler:  async (request, h) => {
 
@@ -42,7 +42,7 @@ exports.updatePerson = {
 
     if (personToUpdate) {
 
-      await personModel.update(personToUpdate.id, payload)
+      await personModel.update(personToUpdate.id, request.payload)
       response = h.response().code(200)
 
     } else {
@@ -61,7 +61,7 @@ exports.searchPerson = {
         firstname: Joi.string(),
         lastname: Joi.string(),
         telephone: Joi.string()
-    }).or('firstname', 'lastname', 'telephone');
+    }).or('firstname', 'lastname', 'telephone')
   },
   handler:  async (request, h) => {
 
@@ -71,10 +71,9 @@ exports.searchPerson = {
   }
 }
 
-exports.createPerson = async (request, h) => {
+exports.createPerson = {
 
   validate: {
-
     payload: {
         firstname: Joi.string().required(),
         lastname: Joi.string().required(),

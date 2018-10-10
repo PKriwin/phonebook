@@ -1,30 +1,21 @@
 'use strict';
 
 const path      = require('path')
-const routes    = require(path.join(path.dirname(__dirname), 'routes'))
-const dbAdapter = require(path.join(path.dirname(__dirname), 'database'))
 const Hapi      = require('hapi')
 const _         = require('lodash')
 
+const server = Hapi.server({
+    port: 3000,
+    host: 'localhost'
+})
+
+exports.init = async (routes, dbAdapter) => {
+
+  await server.register(dbAdapter);
+  await server.register(routes);
+}
 
 exports.start = async () => {
-
-  const server = Hapi.server({
-      port: 3000,
-      host: 'localhost'
-  })
-
-  await initServer(server)
-  await startServer(server)
-}
-
-async function initServer(server) {
-
-  await server.register(routes);
-  await server.register(dbAdapter);
-}
-
-async function startServer(server) {
 
   try {
 
