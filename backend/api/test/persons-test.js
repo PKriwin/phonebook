@@ -1,9 +1,9 @@
 'use strict'
 
 const Chai   = require('chai');
-
-/*
-const testServer =
+const SequelizeDbAdapter = require(path.join(path.dirname(__dirname), 'database', sequelizeDbAdapter))
+const routes = require(path.join(path.dirname(__dirname), 'routes'))
+const testServer = require(path.join(path.dirname(__dirname), 'server'))
 
 const dbAdapterOptions = {
   DB_NAME: 'test',
@@ -12,14 +12,15 @@ const dbAdapterOptions = {
   DB_HOST: 'localhost',
   DB_DIALECT: 'sqlite',
   DB_STORAGE: './test.db',
-  DB_LOGGING: console.log
+  DB_LOGGING: false
 }
-*/
+const dbAdapter = new SequelizeDbAdapter(options)
+const personModel = dbAdapter.models.person
 
 before(async() => {
 
-  await apiServer.init(await dbAdapter.init(options), routes)
-  await apiServer.start()
+  await personModel.flush()
+  await apiServer.init(dbAdapter, routes)
 })
 
 describe(' --- Person resource --- ', () => {
@@ -27,7 +28,7 @@ describe(' --- Person resource --- ', () => {
   describe('GET: /persons/{id}', () => {
 
     it ('Should return 204 - existing person', async (() => {
-
+      
     })
 
     it ('Should return 404 - unknown person', async (() => {

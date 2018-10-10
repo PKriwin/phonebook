@@ -13,6 +13,7 @@ module.exports.create = (sequelize, datatypes) => {
     update:   getModelUpdateMethod(personModel),
     create:   getModelCreateMethod(personModel),
     delete:   getModelDeleteMethod(personModel)
+    flush:    getModelFlushMethod(personModel)
   }
 }
 
@@ -77,7 +78,7 @@ function getModelCreateMethod(personModel) {
 
   return async(values) => {
 
-    await personModel.create(values)
+    return await personModel.create(values)
   }
 }
 
@@ -89,6 +90,17 @@ function getModelDeleteMethod(personModel) {
       where: {
         id
       }
+    })
+  }
+}
+
+function getModelFlushMethod(personModel) {
+
+  return async () => {
+
+    await personModel.destroy({
+      where: {},
+      truncate: true
     })
   }
 }
