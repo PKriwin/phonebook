@@ -36,16 +36,17 @@ describe(' --- Person resource --- ', () => {
         id: 1,
         firstname: 'john',
         lastname: 'smith',
-        telephone: '+32 34 87 654372'
+        telephone: '+32 34 654372'
       })
       const req = { method: 'GET', url: '/persons/1' }
       const resp = await testServer.inject(req)
+      const payload = JSON.parse(resp.payload || {})
 
-      expect(resp.statusCode).to.equal(200);
-      expect(resp.payload.id === 1)
-      expect(resp.payload.firstname === 'john')
-      expect(resp.payload.lastname === 'smith')
-      expect(resp.payload.lastname === '+32 34 87 654372')
+      expect(resp.statusCode).to.equal(200)
+      expect(payload.id).to.equal(1)
+      expect(payload.firstname).to.equal('john')
+      expect(payload.lastname).to.equal('smith')
+      expect(payload.telephone).to.equal('+32 34 654372')
     })
 
     it ('Should return 404 - unknown person', async () => {
@@ -55,7 +56,7 @@ describe(' --- Person resource --- ', () => {
       const req = { method: 'GET', url: '/persons/108' }
       const resp = await testServer.inject(req)
 
-      expect(resp.statusCode).to.equal(404);
+      expect(resp.statusCode).to.equal(404)
     })
   })
 
@@ -92,15 +93,15 @@ describe(' --- Person resource --- ', () => {
       const resp = await testServer.inject(req)
       const records = await personModel.findAll()
 
-      expect(resp.statusCode).to.equal(200);
-      expect(records.length === 1)
-      expect(records[0].firstname === 'john')
-      expect(records[0].lastname === 'smith')
-      expect(records[0].lastname === '+32 87 654372')
+      expect(resp.statusCode).to.equal(204)
+      expect(records.length).to.equal(1)
+      expect(records[0].firstname).to.equal('john')
+      expect(records[0].lastname).to.equal('smith')
+      expect(records[0].telephone).to.equal('+32 37 654372')
     })
 
 
-    it ('Should return 400 - invalid new person (missing field)', async () => {
+    it ('Should return 400 - invalid new person (unknown field)', async () => {
 
       await personModel.flush()
 
@@ -117,8 +118,8 @@ describe(' --- Person resource --- ', () => {
       const resp = await testServer.inject(req)
       const records = await personModel.findAll()
 
-      expect(resp.statusCode).to.equal(400);
-      expect(records.length === 0)
+      expect(resp.statusCode).to.equal(400)
+      expect(records.length).to.equal(0)
     })
 
     it ('Should return 400 - invalid new person (missing field)', async () => {
@@ -136,8 +137,8 @@ describe(' --- Person resource --- ', () => {
       const resp = await testServer.inject(req)
       const records = await personModel.findAll()
 
-      expect(resp.statusCode).to.equal(400);
-      expect(records.length === 0)
+      expect(resp.statusCode).to.equal(400)
+      expect(records.length).to.equal(0)
     })
 
     it ('Should return 400 - invalid new person (malformed telephone number)', async () => {
@@ -156,8 +157,8 @@ describe(' --- Person resource --- ', () => {
       const resp = await testServer.inject(req)
       const records = await personModel.findAll()
 
-      expect(resp.statusCode).to.equal(400);
-      expect(records.length === 0)
+      expect(resp.statusCode).to.equal(400)
+      expect(records.length).to.equal(0)
     })
 
   })
@@ -166,18 +167,100 @@ describe(' --- Person resource --- ', () => {
 
     it ('Should return 204 - valid update', async () => {
 
+      await personModel.flush()
+
+      const newPerson = await personModel.create({
+        id: 1,
+        firstname: 'john',
+        lastname: 'smith',
+        telephone: '+32 87 654372'
+      })
+      const req = {
+        method: 'PATCH',
+        url: '/persons/1',
+        payload: {
+          firstname: 'michel',
+          telephone: '+65 98 654132',
+        }
+      }
+      const resp = await testServer.inject(req)
+      const records = await personModel.findAll()
+
+      expect(resp.statusCode).to.equal(204)
+      expect(records[0].firstname).to.equal('michel')
+      expect(records[0].lastname).to.equal('smith')
+      expect(records[0].telephone).to.equal('+65 98 654132')
     })
 
     it ('Should return 404 - unknown person', async () => {
 
+      await personModel.flush()
+
+      const req = {
+        method: 'PATCH',
+        url: '/persons/10',
+        payload: {
+          firstname: 'joey',
+          telephone: '+65 98 654132',
+        }
+      }
+      const resp = await testServer.inject(req)
+
+      expect(resp.statusCode).to.equal(404)
     })
 
-    it ('Should return 400 - invalid update (missing or unknown field)', async () => {
+    it ('Should return 400 - invalid update (unknown field)', async () => {
 
+      await personModel.flush()
+
+      const newPerson = await personModel.create({
+        id: 1,
+        firstname: 'john',
+        lastname: 'smith',
+        telephone: '+32 34 654372'
+      })
+      const req = {
+        method: 'PATCH',
+        url: '/persons/1',
+        payload: {
+          firstname: 'michel',
+          email: 'mich@gmail.com',
+        }
+      }
+      const resp = await testServer.inject(req)
+      const records = await personModel.findAll()
+
+      expect(resp.statusCode).to.equal(400)
+      expect(records[0].firstname).to.equal('john')
+      expect(records[0].lastname).to.equal('smith')
+      expect(records[0].telephone).to.equal('+32 34 654372')
     })
 
     it ('Should return 400 - invalid patch (malformed telephone number)', async () => {
 
+      await personModel.flush()
+
+      const newPerson = await personModel.create({
+        id: 1,
+        firstname: 'john',
+        lastname: 'smith',
+        telephone: '+32 34 654372'
+      })
+      const req = {
+        method: 'PATCH',
+        url: '/persons/1',
+        payload: {
+          firstname: 'michel',
+          telephone: '32 3 454 32145',
+        }
+      }
+      const resp = await testServer.inject(req)
+      const records = await personModel.findAll()
+
+      expect(resp.statusCode).to.equal(400)
+      expect(records[0].firstname).to.equal('john')
+      expect(records[0].lastname).to.equal('smith')
+      expect(records[0].telephone).to.equal('+32 34 654372')
     })
   })
 })

@@ -86,6 +86,6 @@ exports.createPerson = {
 
       await personModel.create(request.payload)
 
-      return h.response().code(200)
+      return h.response().code(204)
     }
 }
