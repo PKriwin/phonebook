@@ -2,8 +2,24 @@
 
 const Chai   = require('chai');
 
+/*
+const testServer =
+
+const dbAdapterOptions = {
+  DB_NAME: 'test',
+  DB_USERNAME: 'user',
+  DB_PASSWORD: 'pswd',
+  DB_HOST: 'localhost',
+  DB_DIALECT: 'sqlite',
+  DB_STORAGE: './test.db',
+  DB_LOGGING: console.log
+}
+*/
+
 before(async() => {
 
+  await apiServer.init(await dbAdapter.init(options), routes)
+  await apiServer.start()
 })
 
 describe(' --- Person resource --- ', () => {

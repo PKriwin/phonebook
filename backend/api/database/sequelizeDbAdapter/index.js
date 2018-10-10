@@ -1,35 +1,28 @@
 'use strict'
 
 const path = require('path')
-const Sequelize = require('sequelize');
+const Sequelize = require('sequelize')
 
-module.exports.init = async(options) => {
+module.exports = class SequelizeDbAdapter {
 
-  const sequelizeInstance = new Sequelize(
-        options.DB_NAME,
-        options.DB_USERNAME,
-        options.DB_PASSWORD,
-        {
-            host     : options.DB_HOST,
-            dialect  : options.DB_DIALECT,
-            storage  : options.DB_STORAGE || null,
-            define   : { timestamps: false, paranoid: false },
-            logging  : options.DB_LOGGING,
-            operatorsAliases: false
+  constructor(options) {
 
-        });
-  const personModel = require(path.join(__dirname, 'models', 'person.js'))
-                          .create(sequelizeInstance, Sequelize.DataTypes)
+    const sequelizeInstance = new Sequelize(
+          options.DB_NAME,
+          options.DB_USERNAME,
+          options.DB_PASSWORD,
+          {
+              host     : options.DB_HOST,
+              dialect  : options.DB_DIALECT,
+              storage  : options.DB_STORAGE || null,
+              define   : { timestamps: false, paranoid: false },
+              logging  : options.DB_LOGGING,
+              operatorsAliases: false
 
-  const dbAdapter = { models: { person: personModel }}
+          });
+    const personModel = require(path.join(__dirname, 'models', 'person.js'))
+                            .create(sequelizeInstance, Sequelize.DataTypes)
 
-  return {
-
-    name: 'dbAdapter',
-    version: '1.0.0',
-    register: async function (server, options) {
-
-      server.app.dbAdapter = dbAdapter
-    }
+    this.models = { person: personModel }
   }
 }

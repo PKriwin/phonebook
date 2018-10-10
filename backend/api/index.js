@@ -17,7 +17,7 @@ const options = {
 
 async function main () {
 
-  await apiServer.init(await dbAdapter.init(options), routes)
+  await apiServer.init(routes, new dbAdapter(options))
   await apiServer.start()
 }
 

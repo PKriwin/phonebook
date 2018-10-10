@@ -3,13 +3,7 @@
 const path     = require("path")
 const handlers = require(path.join(path.dirname(__dirname), 'handlers'))
 
-module.exports = {
-
-    name: 'routes',
-    version: '1.0.0',
-    register: async (server, options) => {
-
-      server.route([
+module.exports = [
         {
           method: 'GET',
           path: '/persons/{id}',
@@ -26,7 +20,5 @@ module.exports = {
             method: 'POST',
             path: '/persons',
             config: handlers.persons.createPerson
-        },
-      ])
-    }
-}
+        }
+]

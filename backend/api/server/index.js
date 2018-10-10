@@ -11,8 +11,30 @@ const server = Hapi.server({
 
 exports.init = async (routes, dbAdapter) => {
 
-  await server.register(dbAdapter);
-  await server.register(routes);
+  await registerDbAdapter(dbAdapter)
+  await registerRoutes(routes);
+}
+
+async function registerDbAdapter(dbAdapter) {
+
+  await server.register({
+      name: 'dbAdapter',
+      register: async (server, options) => {
+
+        server.app.dbAdapter = dbAdapter
+      }
+    });
+}
+
+async function registerRoutes(routes) {
+
+  server.register({
+      name: 'routes',
+      register: async (server, options) => {
+
+        server.route(routes)
+      }
+  })
 }
 
 exports.start = async () => {
