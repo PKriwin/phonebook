@@ -4,9 +4,10 @@ const path     = require("path")
 const handlers = require(path.join(path.dirname(__dirname), 'handlers'))
 
 module.exports = {
+
     name: 'routes',
     version: '1.0.0',
-    register: async function (server, options) {
+    register: async (server, options) => {
 
       server.route([
         {
@@ -23,7 +24,7 @@ module.exports = {
             config: handlers.persons.searchPerson
         },{
             method: 'POST',
-            path: '/persons/search',
+            path: '/persons',
             config: handlers.persons.createPerson
         },
       ])
