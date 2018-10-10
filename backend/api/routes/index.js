@@ -11,9 +11,21 @@ module.exports = {
       server.route([
         {
           method: 'GET',
-          path: '/',
-          handler: handlers.getHelloWorld
-        }
+          path: '/persons/{id}',
+          config: handlers.persons.getPersonById
+        }, {
+            method: 'PATCH',
+            path: '/persons/{id}',
+            config: handlers.persons.updatePerson
+        }, {
+            method: 'GET',
+            path: '/persons/search',
+            config: handlers.persons.searchPerson
+        },{
+            method: 'POST',
+            path: '/persons/search',
+            config: handlers.persons.createPerson
+        },
       ])
     }
 }

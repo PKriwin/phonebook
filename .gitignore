@@ -1,2 +1,3 @@
 backend/api/node_modules
 backend/api/npm-debug.log
+backend/api/test.db
