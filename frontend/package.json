@@ -1,0 +1,38 @@
+{
+  "name": "phonebook_frontend",
+  "version": "1.0.0",
+  "description": "frontend of phonebook app",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack -p",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PKriwin/phonebook.git"
+  },
+  "author": "Paul Kriwin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PKriwin/phonebook/issues"
+  },
+  "homepage": "https://github.com/PKriwin/phonebook#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "bulma": "^0.7.1",
+    "font-awesome": "^4.7.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "superagent": "^4.0.0-beta.5"
+  }
+}

@@ -1,3 +1,5 @@
 backend/api/node_modules
 backend/api/npm-debug.log
 backend/api/test.db
+frontend/node_modules
+frontend/npm-debug.log
