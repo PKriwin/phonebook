@@ -15,6 +15,25 @@ exports.init = async (routes, dbAdapter) => {
   await registerRoutes(routes);
 }
 
+exports.start = async () => {
+
+  try {
+
+    server.start()
+    console.log(`Server running at: ${server.info.uri}`);
+  }
+  catch(err) {
+
+    console.log(err);
+    process.exit(1);
+  }
+}
+
+exports.inject = async (options) => {
+
+  return await (server.inject(options))
+}
+
 async function registerDbAdapter(dbAdapter) {
 
   await server.register({
@@ -35,18 +54,4 @@ async function registerRoutes(routes) {
         server.route(routes)
       }
   })
-}
-
-exports.start = async () => {
-
-  try {
-
-    server.start()
-    console.log(`Server running at: ${server.info.uri}`);
-  }
-  catch(err) {
-
-    console.log(err);
-    process.exit(1);
-  }
 }

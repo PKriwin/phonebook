@@ -43,7 +43,7 @@ exports.updatePerson = {
     if (personToUpdate) {
 
       await personModel.update(personToUpdate.id, request.payload)
-      response = h.response().code(200)
+      response = h.response().code(204)
 
     } else {
 

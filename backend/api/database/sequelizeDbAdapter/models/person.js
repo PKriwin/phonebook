@@ -10,9 +10,10 @@ module.exports.create = (sequelize, datatypes) => {
 
     search:   getModelSearchMethod(personModel, sequelize),
     findById: getModelFindByIdMethod(personModel),
+    findAll:  getModelFindAllMethod(personModel),
     update:   getModelUpdateMethod(personModel),
     create:   getModelCreateMethod(personModel),
-    delete:   getModelDeleteMethod(personModel)
+    delete:   getModelDeleteMethod(personModel),
     flush:    getModelFlushMethod(personModel)
   }
 }
@@ -78,7 +79,7 @@ function getModelCreateMethod(personModel) {
 
   return async(values) => {
 
-    return await personModel.create(values)
+    return (await personModel.create(values)).get({plain: true})
   }
 }
 
@@ -102,5 +103,13 @@ function getModelFlushMethod(personModel) {
       where: {},
       truncate: true
     })
+  }
+}
+
+function getModelFindAllMethod(personModel) {
+
+  return async () => {
+
+    return await personModel.findAll({})
   }
 }
