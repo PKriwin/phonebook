@@ -18,6 +18,15 @@ export default class Navbar extends Component {
                 <b>Phonebook</b>
               </Link>
             </div>
+
+            <div className='navbar-menu'>
+              <div className='navbar-end'>
+                <Link to='/create_person' className="navbar-item" href="search">
+                  <i className="fas fa-plus-circle" id="add-entry-menu-item"></i>
+                    <span id='add-entry-menu-item'>Add new entry</span>
+                </Link>
+              </div>
+            </div>
           </nav>
         )
     }

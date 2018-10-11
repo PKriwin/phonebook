@@ -18,14 +18,14 @@ api.createPerson = (values) => {
 
   return req.post(apiUrl + '/persons')
             .send(values)
-            .then(res => res.body)
+            .then(res => res.statusCode == 204)
 }
 
 api.updatePerson = (id, values) => {
 
   return req.patch(apiUrl + '/persons/' + id)
             .send(values)
-            .then(res => res.body)
+            .then(res => res.statusCode == 204)
 }
 
 export default api
