@@ -15,7 +15,13 @@ export class App extends Component {
         return (
           <div>
             <Navbar/>
-            <PersonInfosForm onValidInfos={() => {console.log('validooo')}}/>
+            <PersonInfosForm
+              values={{
+                firstname: 'michel',
+                lastname: 'jackson',
+                telephone: '+32 65 876543'
+              }}
+              onValidInfos={() => {console.log('validooo')}}/>
           </div>
         )
     }

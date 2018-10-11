@@ -42,6 +42,7 @@ export default class TextField extends Component {
               <div className="field">
                   <div className="control">
                       <input
+                        value={this.props.value}
                         onBlur={this.handleOnBlur}
                         onChange={this.handleOnChange}
                         className={this.state.invalidValue ?

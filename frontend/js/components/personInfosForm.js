@@ -39,6 +39,7 @@ export default class PersonInfosForm extends Component {
           <div className="section">
             <div className="container is-fluid">
               <TextField
+                  value={this.props.values.firstname}
                   onValidValue={() => this.fieldChanged({fieldName: 'firstname', isValid: true})}
                   onInvalidValue={() => this.fieldChanged({fieldName: 'firstname', isValid: false})}
                   label='Firstname'
@@ -46,6 +47,7 @@ export default class PersonInfosForm extends Component {
                   validation={/\w+/}
                   errMsg={"Cannot be empty"}/>
               <TextField
+                  value={this.props.values.lastname}
                   onValidValue= {() => this.fieldChanged({fieldName: 'lastname', isValid: true})}
                   onInvalidValue= {() => this.fieldChanged({fieldName: 'lastname', isValid: true})}
                   label='Lastname'
@@ -53,6 +55,7 @@ export default class PersonInfosForm extends Component {
                   validation={/\w+/}
                   errMsg={"Cannot be empty"}/>
               <TextField
+                  value={this.props.values.telephone}
                   onValidValue= {() => this.fieldChanged({fieldName: 'telephone', isValid: true})}
                   onInvalidValue= {() => this.fieldChanged({fieldName: 'telephone', isValid: true})}
                   label='Telephone'
