@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import PersonInfosForm from '../components/personInfosForm'
+import ConfirmOrCancelButtonGroup from '../components/confirmOrCancelButtonGroup'
 
 export default class UpdatePersonForm extends Component {
 
@@ -8,16 +9,14 @@ export default class UpdatePersonForm extends Component {
 
         super(props)
 
+        this.state = {confimEnabled: true}
+
         this.onInfosChangedHandler = this.onInfosChangedHandler.bind(this)
     }
 
     onInfosChangedHandler(infos) {
-console.log(infos)
-      //this.setState({confirmEnabled: infos.isValid, values: infos.values})
-      if(infos.isValid)
-        console.log('valid')
-      else
-        console.log('invalid')
+
+        this.setState({confimEnabled: infos.isValid})
     }
 
     render() {
@@ -29,6 +28,10 @@ console.log(infos)
               values={ this.props.person}
               onInfosChanged={this.onInfosChangedHandler}
               />
+              <ConfirmOrCancelButtonGroup
+                confimEnabled={this.state.confimEnabled}
+                onConfirm={() => console.log('CONFIRM')}
+                onCancel={() => console.log('CANCEL')}/>
           </div>
         )
     }

@@ -15,17 +15,7 @@ export default class TextField extends Component {
        }
 
       this.handleOnChange = this.handleOnChange.bind(this)
-      this.handleOnBlur = this.handleOnBlur.bind(this)
       this.fireOnChange = this.fireOnChange.bind(this)
-  }
-
-  handleOnBlur() {
-
-      const newState = _.clone(this.state)
-
-      newState.dispErrMsg = !this.state.value.match(this.props.validation)
-      this.setState(newState)
-      this.fireOnChange()
   }
 
   handleOnChange(event) {
@@ -33,10 +23,8 @@ export default class TextField extends Component {
     this.setState({
       value: event.target.value,
       isValid: event.target.value.match(this.props.validation) !== null,
-      dispErrMsg: false
-    })
-
-    this.fireOnChange()
+      dispErrMsg: !event.target.value.match(this.props.validation)
+    }, this.fireOnChange)
   }
 
   fireOnChange() {
@@ -60,7 +48,6 @@ export default class TextField extends Component {
                   <div className="control">
                       <input
                         value={this.state.value}
-                        onBlur={this.handleOnBlur}
                         onChange={this.handleOnChange}
                         className={this.state.dispErrMsg ?
                           'input is-danger' : 'input'}

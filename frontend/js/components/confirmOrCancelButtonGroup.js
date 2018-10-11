@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class ConfirmOrCancelButtonGroup extends Component {
+export default class ConfirmOrCancelButtonGroup extends Component {
 
     constructor(props) {
 
@@ -13,12 +13,19 @@ export class ConfirmOrCancelButtonGroup extends Component {
             <div className='container is-fluid'>
               <div className="field is-grouped is-pulled-right">
                 <div className="control">
-                  <button className="button is-black">Confirm</button>
+                  <button
+                    disabled={!this.props.confimEnabled}
+                    className="button is-black"
+                    onClick={this.props.onConfirm}
+                  >Confirm</button>
                 </div>
                 <div className="control">
-                  <button className="button is-outline is-inverted">Cancel</button>
+                  <button
+                    className="button is-outline is-inverted"
+                    onClick={this.props.onCancel}
+                  >Cancel</button>
                 </div>
-              </div>
+                </div>
             </div>
           </div>
         )
