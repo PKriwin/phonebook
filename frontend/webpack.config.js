@@ -2,6 +2,7 @@ const path = require('path')
 
 module.exports = {
   entry: [path.resolve(__dirname, 'js', 'index.js')],
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
@@ -17,18 +18,15 @@ module.exports = {
       }, {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader']
-      },{
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loaders: ['url-loader']
-      },{
-         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-         loaders: ['url-loader']
-      },{
-         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-         loader: ['url-loader']
-      },{
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: ['url-loader']
+      }, {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/'
+          }
+        }]
       }
     ]
   }

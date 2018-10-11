@@ -1,5 +1,8 @@
 backend/api/node_modules
 backend/api/npm-debug.log
 backend/api/test.db
+backend/assets/web_app_server/node_modules
 frontend/node_modules
+frontend/dist/bundle.js
 frontend/npm-debug.log
+.DS_Store

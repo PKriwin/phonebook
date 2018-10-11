@@ -1,0 +1,15 @@
+{
+  "name": "phone_book_web_app_server",
+  "version": "1.0.0",
+  "description": "web app server of phonebook app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paul Kriwin",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^17.6.0",
+    "inert": "^5.1.0"
+  }
+}
