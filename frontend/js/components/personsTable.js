@@ -8,6 +8,7 @@ export default class PersonsTable extends Component {
     }
 
     render() {
+
         return (
           <div className="container is-fluid">
           <table className = 'table table is-bordered is-striped is-narrow is-hoverable is-fullwidth'>
@@ -17,7 +18,7 @@ export default class PersonsTable extends Component {
                   <th>Firstname</th>
                   <th>Lastname</th>
                   <th>Telephone</th>
-                  <td><i className="fas fa-edit"></i></td>
+                  <th>Edit</th>
                 </tr>
               </thead>
 

@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 
+import api from '../business/api'
 import TextField from '../components/textField'
 import PersonsTable from '../components/personsTable'
 
@@ -39,12 +40,25 @@ export default class SearchPersonForm extends Component {
         this.search = this.search.bind(this)
     }
 
-    search() {
+    search(terms) {
 
-      this.setState({
-        searchTherms: this.state.searchTherms,
-        personList: persons
-      })
+      if (terms.value) {
+
+        api.search(terms.value).then(personss => {
+
+          this.setState({
+            searchTherms: this.state.searchTherms,
+            personList: personss
+          })
+        })
+
+      } else {
+
+        this.setState({
+          searchTherms: this.state.searchTherms,
+          personList: []
+        })
+      }
     }
 
     render() {

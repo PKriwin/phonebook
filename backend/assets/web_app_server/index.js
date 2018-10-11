@@ -4,7 +4,13 @@ const Hapi  = require('hapi');
 const Inert = require('inert')
 
 const config = require('./config.json')
-const server = new Hapi.Server({ port: config.port, host: config.host })
+const server = new Hapi.Server({
+  port: config.port,
+  host: config.host,
+  routes: {
+    cors: true
+  }
+})
 
 initAndStartServer()
 

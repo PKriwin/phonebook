@@ -6,7 +6,10 @@ const _         = require('lodash')
 
 const server = Hapi.server({
     port: 3000,
-    host: 'localhost'
+    host: 'localhost',
+    routes: {
+      cors: true
+    }
 })
 
 exports.init = async (routes, dbAdapter) => {
