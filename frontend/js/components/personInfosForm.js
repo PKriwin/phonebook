@@ -10,9 +10,9 @@ export default class PersonInfosForm extends Component {
 
         this.state = {
 
-          firstname: false,
-          lastname: false,
-          telephone: false,
+          firstname: this.props.values.firstname.match(/\w+/),
+          lastname: this.props.values.lastname.match(/\w+/),
+          telephone: this.props.values.telephone.match(/\+\d{2,}\s\d{2,}\s\d{6,}/)
         }
 
         this.areFieldsValid = this.areFieldsValid.bind(this)
@@ -45,7 +45,7 @@ export default class PersonInfosForm extends Component {
                   label='Firstname'
                   placeholder=''
                   validation={/\w+/}
-                  errMsg={"Cannot be empty"}/>
+                  errMsg={"firstname cannot be empty or contain only special characters"}/>
               <TextField
                   value={this.props.values.lastname}
                   onValidValue= {() => this.fieldChanged({fieldName: 'lastname', isValid: true})}
@@ -53,7 +53,7 @@ export default class PersonInfosForm extends Component {
                   label='Lastname'
                   placeholder=''
                   validation={/\w+/}
-                  errMsg={"Cannot be empty"}/>
+                  errMsg={"lastname cannot be empty or contain only special characters"}/>
               <TextField
                   value={this.props.values.telephone}
                   onValidValue= {() => this.fieldChanged({fieldName: 'telephone', isValid: true})}

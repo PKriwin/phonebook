@@ -6,8 +6,8 @@ export default class TextField extends Component {
 
       super(props)
 
-      this.state = {value: '', invalidValue: false};
-
+      this.state = {value: this.props.value, invalidValue: false};
+ 
       this.handleOnChange = this.handleOnChange.bind(this);
       this.handleOnBlur = this.handleOnBlur.bind(this);
   }
@@ -42,7 +42,7 @@ export default class TextField extends Component {
               <div className="field">
                   <div className="control">
                       <input
-                        value={this.props.value}
+                        value={this.state.value}
                         onBlur={this.handleOnBlur}
                         onChange={this.handleOnChange}
                         className={this.state.invalidValue ?
