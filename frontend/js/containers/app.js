@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import Navbar from '../components/navbar'
 
-import UpdatePersonForm from './updatePersonForm'
+import CreatePersonForm from './createPersonForm'
 
 export class App extends Component {
 
@@ -15,12 +15,7 @@ export class App extends Component {
         return (
           <div>
             <Navbar/>
-            <UpdatePersonForm
-              person={{
-                firstname: 'michel',
-                lastname: 'jackson',
-                telephone: '+32 65 876543'
-              }}/>
+            <CreatePersonForm />
           </div>
         )
     }

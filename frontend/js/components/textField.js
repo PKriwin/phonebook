@@ -9,7 +9,7 @@ export default class TextField extends Component {
       super(props)
 
       this.state = {
-         value: this.props.value,
+         value: (this.props.value || ''),
          isValid: this.props.value ?
           this.props.value.match(this.props.validation) !== null : true
        }
