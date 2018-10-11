@@ -20,9 +20,7 @@ export class App extends Component {
           <div>
               <Navbar/>
                   <Route exact path="/" component={SearchPersonForm} />
-                  <Route path="/update_person" component={() =>
-                    <UpdatePersonForm person={{ id:1, firstname: 'first', lastname: 'last', telephone: '+32 54 676543' }}/>
-                  }/>
+                  <Route path="/update_person" component={UpdatePersonForm}/>
                   <Route path="/create_person" component={CreatePersonForm}/>
             </div>
           </Router>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { Link } from "react-router-dom";
+
 export default class PersonsTable extends Component {
 
     constructor(props) {
@@ -32,7 +34,11 @@ export default class PersonsTable extends Component {
                         <td>{person.firstname}</td>
                         <td>{person.lastname}</td>
                         <td>{person.telephone}</td>
-                        <td><i className="fas fa-edit"></i></td>
+                        <td>
+                          <Link to={'/update_person?id=' + person.id}>
+                            <i className="fas has-text-black fa-edit"></i>
+                          </Link>
+                        </td>
                       </tr>
                     )
                   })

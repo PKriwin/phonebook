@@ -36,7 +36,7 @@ export default class createPersonForm extends Component {
         })
     }
 
-    render() {
+    render() { 
         return (
           <div className="section">
             <h2 className="title title-is-2">Create person</h2>

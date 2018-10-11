@@ -14,6 +14,12 @@ api.search = (terms) => {
             }).then(res => res.body)
 }
 
+api.getPerson = (id) => {
+
+  return req.get(apiUrl + '/persons/' + id)
+            .then(res => res.body)
+}
+
 api.createPerson = (values) => {
 
   return req.post(apiUrl + '/persons')
