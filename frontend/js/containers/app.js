@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 
-import Navbar from '../components/navbar'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import Navbar from '../components/navbar'
 import CreatePersonForm from './createPersonForm'
+import UpdatePersonForm from './updatePersonForm'
 
 export class App extends Component {
 
@@ -13,10 +15,16 @@ export class App extends Component {
 
     render() {
         return (
+          <Router>
           <div>
-            <Navbar/>
-            <CreatePersonForm />
-          </div>
+              <Navbar/>
+                  <Route exact path="/" component={CreatePersonForm} />
+                  <Route path="/update_person" component={() =>
+                    <UpdatePersonForm person={{ id:1, firstname: 'first', lastname: 'last', telephone: '+32 54 676543' }}/>
+                  }/>
+                  <Route path="/create_person" component={CreatePersonForm}/>
+            </div>
+          </Router>
         )
     }
 }
