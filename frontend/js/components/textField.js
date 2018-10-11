@@ -1,33 +1,50 @@
 import React, { Component } from 'react'
 
+import _ from 'lodash'
+
 export default class TextField extends Component {
 
   constructor(props) {
 
       super(props)
 
-      this.state = {value: this.props.value, invalidValue: false};
- 
-      this.handleOnChange = this.handleOnChange.bind(this);
-      this.handleOnBlur = this.handleOnBlur.bind(this);
+      this.state = {
+         value: this.props.value,
+         isValid: this.props.value ?
+          this.props.value.match(this.props.validation) !== null : true
+       }
+
+      this.handleOnChange = this.handleOnChange.bind(this)
+      this.handleOnBlur = this.handleOnBlur.bind(this)
+      this.fireOnChange = this.fireOnChange.bind(this)
   }
 
   handleOnBlur() {
 
-      this.setState({
-        value: this.state.value,
-        invalidValue: !this.state.value.match(this.props.validation)
-      })
+      const newState = _.clone(this.state)
 
-      if (this.state.value.match(this.props.validation))
-        this.props.onValidValue()
-      else
-        this.props.onInvalidValue()
+      newState.dispErrMsg = !this.state.value.match(this.props.validation)
+      this.setState(newState)
+      this.fireOnChange()
   }
 
   handleOnChange(event) {
 
-    this.setState({value: event.target.value});
+    this.setState({
+      value: event.target.value,
+      isValid: event.target.value.match(this.props.validation) !== null,
+      dispErrMsg: false
+    })
+
+    this.fireOnChange()
+  }
+
+  fireOnChange() {
+
+    this.props.onChange({
+      isValid: this.state.isValid,
+      value: this.state.value,
+    })
   }
 
   render() {
@@ -45,12 +62,12 @@ export default class TextField extends Component {
                         value={this.state.value}
                         onBlur={this.handleOnBlur}
                         onChange={this.handleOnChange}
-                        className={this.state.invalidValue ?
+                        className={this.state.dispErrMsg ?
                           'input is-danger' : 'input'}
                         type="text"
                         placeholder={this.props.placeholder}/>
                         {
-                          this.state.invalidValue ?
+                          this.state.dispErrMsg ?
                             <p className="help is-danger">{this.props.errMsg}</p> : null
                         }
                   </div>

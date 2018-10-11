@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import Navbar from '../components/navbar'
 
-import PersonInfosForm from '../components/personInfosForm'
+import UpdatePersonForm from './updatePersonForm'
 
 export class App extends Component {
 
@@ -15,13 +15,12 @@ export class App extends Component {
         return (
           <div>
             <Navbar/>
-            <PersonInfosForm
-              values={{
+            <UpdatePersonForm
+              person={{
                 firstname: 'michel',
                 lastname: 'jackson',
                 telephone: '+32 65 876543'
-              }}
-              onValidInfos={() => {console.log('validooo')}}/>
+              }}/>
           </div>
         )
     }
