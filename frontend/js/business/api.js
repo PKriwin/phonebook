@@ -1,6 +1,10 @@
 import req from 'superagent'
 
-const apiUrl = 'http://localhost:3000'
+import config from '../../config.json'
+
+const apiUrl = config.apiUrl
+
+console.log(app)
 
 const api = {}
 
