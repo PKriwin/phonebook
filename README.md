@@ -10,8 +10,9 @@ You can find the documentation [here](https://github.com/PKriwin/phonebook/wiki)
 
 ### 1. requirements
 
-+ **Node >= v8** : available on [Node.js](https://nodejs.org/en/)
-+ **npm**
++ **Nodejs >= v8** 
++ **Npm**
++ **A dbms server (mysql, mssql, postgres) or a sqlite .db file**
 
 ### 2. Clone the project
 

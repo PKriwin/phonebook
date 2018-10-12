@@ -6,7 +6,7 @@ const apiUrl = config.apiUrl
 
 const api = {}
 
-api.search = (terms) => {
+api.searchPerson = (terms) => {
 
   return req.get(apiUrl + '/persons/search')
             .query({

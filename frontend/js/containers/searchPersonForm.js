@@ -44,7 +44,7 @@ export default class SearchPersonForm extends Component {
 
       if (terms.value) {
 
-        api.search(terms.value).then(personss => {
+        api.searchPerson(terms.value).then(personss => {
 
           this.setState({
             searchTherms: this.state.searchTherms,
