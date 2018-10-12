@@ -58,7 +58,8 @@ export default class UpdatePersonForm extends Component {
               />
               <ConfirmOrCancelButtonGroup
                 confimEnabled={this.state.confimEnabled}
-                onConfirm={this.confirmHandler}/>
+                onConfirm={this.confirmHandler}
+                onCancel={() => this.props.history.push('/')}/>
                 {
                   this.state.dispCreatedMsg ?
 
