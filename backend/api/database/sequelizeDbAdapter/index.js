@@ -8,15 +8,15 @@ module.exports = class SequelizeDbAdapter {
   constructor(options) {
 
     const sequelizeInstance = new Sequelize(
-          options.DB_NAME,
-          options.DB_USERNAME,
-          options.DB_PASSWORD,
+          options.dbName,
+          options.dbUsername,
+          options.dbPassword,
           {
-              host     : options.DB_HOST,
-              dialect  : options.DB_DIALECT,
-              storage  : options.DB_STORAGE || null,
+              host     : options.dbHost,
+              dialect  : options.dbDialect,
+              storage  : options.dbStorage || null,
               define   : { timestamps: false, paranoid: false },
-              logging  : options.DB_LOGGING,
+              logging  : options.dbLogging == 'true' ? console.log : false,
               operatorsAliases: false
 
           });

@@ -1,5 +1,6 @@
 backend/api/node_modules
 backend/api/npm-debug.log
+backend/api/config.json
 backend/assets/web_app_server/node_modules
 backend/assets/web_app_server/config.json
 frontend/node_modules
