@@ -10,7 +10,7 @@ You can find the documentation [here](https://github.com/PKriwin/phonebook/wiki)
 
 ### 1. requirements
 
-+ **Nodejs >= v8** 
++ **Nodejs >= v8**
 + **Npm**
 + **A dbms server (mysql, mssql, postgres) or a sqlite .db file**
 
@@ -50,6 +50,10 @@ Create  a `config.json` file in each specified directory like below:
   }
 }
 ```
+
+/!\
+To gain some time, use the provided `sqlite` database in `/backend/api/test/test.db`
+/!\
 
 #### backend/assets/web_app_server/config.json
 ```
