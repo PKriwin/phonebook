@@ -5,7 +5,7 @@ const Chai   = require('chai');
 const expect = Chai.expect;
 const SequelizeDbAdapter = require(path.join(path.dirname(__dirname), 'database', 'sequelizeDbAdapter'))
 const routes = require(path.join(path.dirname(__dirname), 'routes'))
-const testServer = require(path.join(path.dirname(__dirname), 'server'))
+const ApiServer = require(path.join(path.dirname(__dirname), 'server'))
 
 const dbAdapterOptions = {
   DB_NAME: 'test',
@@ -13,15 +13,22 @@ const dbAdapterOptions = {
   DB_PASSWORD: 'pswd',
   DB_HOST: 'localhost',
   DB_DIALECT: 'sqlite',
-  DB_STORAGE: '../test.db',
+  DB_STORAGE: path.join(__dirname, 'test.db'),
   DB_LOGGING: false
 }
 const dbAdapter = new SequelizeDbAdapter(dbAdapterOptions)
 const personModel = dbAdapter.models.person
 
+const testServer = new ApiServer({
+   port: 3000,
+   host: 'localhost',
+   dbAdapter: new SequelizeDbAdapter(dbAdapterOptions),
+   routes: routes
+})
+
 before(async() => {
 
-  await testServer.init(routes, dbAdapter)
+  await testServer.init()
 })
 
 describe(' --- Person resource --- ', () => {

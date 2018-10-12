@@ -7,7 +7,7 @@ const VALIDATIONS = {
 
   firstname: /\w+/,
   lastname: /\w+/,
-  telephone: /\+\d{2,}\s\d{2,}\s\d{6,}/
+  telephone: /\+\d{2,}\s\d{2,}\s\d{6,}$/
 }
 
 export default class PersonInfosForm extends Component {

@@ -4,40 +4,48 @@ const path      = require('path')
 const Hapi      = require('hapi')
 const _         = require('lodash')
 
-const server = Hapi.server({
-    port: 3000,
-    host: 'localhost',
-    routes: {
-      cors: true
+module.exports = class Server {
+
+  constructor(options) {
+
+    this.server = Hapi.server({
+        port: options.port,
+        host: options.host,
+        routes: {
+          cors: true
+        }
+    })
+    this.dbAdapter = options.dbAdapter
+    this.routes = options.routes
+  }
+
+  async init() {
+
+    await registerDbAdapter(this.server, this.dbAdapter)
+    await registerRoutes(this.server, this.routes);
+  }
+
+  async start() {
+
+    try {
+
+      this.server.start()
+      console.log(`Server running at: ${this.server.info.uri}`);
     }
-})
+    catch(err) {
 
-exports.init = async (routes, dbAdapter) => {
-
-  await registerDbAdapter(dbAdapter)
-  await registerRoutes(routes);
-}
-
-exports.start = async () => {
-
-  try {
-
-    server.start()
-    console.log(`Server running at: ${server.info.uri}`);
+      console.log(err);
+      process.exit(1);
+    }
   }
-  catch(err) {
 
-    console.log(err);
-    process.exit(1);
+  async inject(options) {
+
+    return await (this.server.inject(options))
   }
 }
 
-exports.inject = async (options) => {
-
-  return await (server.inject(options))
-}
-
-async function registerDbAdapter(dbAdapter) {
+async function registerDbAdapter(server, dbAdapter) {
 
   await server.register({
       name: 'dbAdapter',
@@ -48,7 +56,7 @@ async function registerDbAdapter(dbAdapter) {
     });
 }
 
-async function registerRoutes(routes) {
+async function registerRoutes(server, routes) {
 
   server.register({
       name: 'routes',
