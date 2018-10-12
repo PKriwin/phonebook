@@ -5,6 +5,6 @@ backend/assets/web_app_server/node_modules
 backend/assets/web_app_server/config.json
 frontend/node_modules
 frontend/dist
-frontend/config.js
+frontend/config.json
 frontend/npm-debug.log
 .DS_Store

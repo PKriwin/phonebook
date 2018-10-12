@@ -8,13 +8,13 @@ const routes = require(path.join(path.dirname(__dirname), 'routes'))
 const ApiServer = require(path.join(path.dirname(__dirname), 'server'))
 
 const dbAdapterOptions = {
-  DB_NAME: 'test',
-  DB_USERNAME: 'user',
-  DB_PASSWORD: 'pswd',
-  DB_HOST: 'localhost',
-  DB_DIALECT: 'sqlite',
-  DB_STORAGE: path.join(__dirname, 'test.db'),
-  DB_LOGGING: false
+  dbName: 'test',
+  dbUsername: 'user',
+  dbPassword: 'pswd',
+  dbHost: 'localhost',
+  dbDialect: 'sqlite',
+  dbStorage: path.join(__dirname, 'test.db'),
+  dbLogging: "false"
 }
 const dbAdapter = new SequelizeDbAdapter(dbAdapterOptions)
 const personModel = dbAdapter.models.person

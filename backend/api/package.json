@@ -4,7 +4,8 @@
   "description": "REST API for phonebook app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "node_modules/.bin/mocha test/person-test.js --timeout 15000"
   },
   "author": "Paul Kriwin",
   "license": "MIT",

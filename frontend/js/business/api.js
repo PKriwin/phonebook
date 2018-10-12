@@ -4,8 +4,6 @@ import config from '../../config.json'
 
 const apiUrl = config.apiUrl
 
-console.log(app)
-
 const api = {}
 
 api.search = (terms) => {
