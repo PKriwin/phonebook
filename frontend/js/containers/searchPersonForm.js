@@ -5,31 +5,6 @@ import api from '../business/api'
 import TextField from '../components/textField'
 import PersonsTable from '../components/personsTable'
 
-const persons = [
-  {
-    id: 1,
-    firstname: 'john',
-    lastname: 'smith',
-    telephone: '+32 45 543234'
-  },{
-    id: 2,
-    firstname: 'todd',
-    lastname: 'smith',
-    telephone: '+32 45 543234'
-  },{
-    id: 3,
-    firstname: 'jim',
-    lastname: 'smith',
-    telephone: '+32 45 543234'
-  },{
-    id: 4,
-    firstname: 'joe',
-    lastname: 'smith',
-    telephone: '+32 45 543234'
-  }
-]
-
-
 export default class SearchPersonForm extends Component {
 
     constructor(props) {
@@ -38,27 +13,41 @@ export default class SearchPersonForm extends Component {
 
         this.state = { searchTherms: '', personList: [] }
         this.search = this.search.bind(this)
+        this.displaySearchResults = this.displaySearchResults.bind(this)
     }
 
     search(terms) {
 
       if (terms.value) {
 
-        api.searchPerson(terms.value).then(personss => {
+        api.searchPerson(terms.value).then(persons => {
 
           this.setState({
-            searchTherms: this.state.searchTherms,
-            personList: personss
+            searchTherms: terms.value,
+            personList: persons
           })
         })
 
       } else {
 
         this.setState({
-          searchTherms: this.state.searchTherms,
+          searchTherms: terms.value,
           personList: []
         })
       }
+    }
+
+    displaySearchResults() {
+
+      return this.state.personList.length > 0 ?
+      <div className="section">
+        <PersonsTable persons={this.state.personList}/>
+      </div> :
+      <div className='section'>
+        <div className="container-fluid has-text-centered">
+          <p>No results</p>
+        </div>
+      </div>
     }
 
     render() {
@@ -73,10 +62,8 @@ export default class SearchPersonForm extends Component {
                 validation={/.*/}/>
             </div>
             {
-              this.state.personList.length > 0 ?
-                <div className="section">
-                  <PersonsTable persons={this.state.personList}/>
-                </div> : null
+              this.state.searchTherms ?
+                this.displaySearchResults() : null
             }
         </div>
       )

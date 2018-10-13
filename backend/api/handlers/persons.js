@@ -3,6 +3,8 @@
 const Joi = require('joi')
 const _   = require('lodash')
 
+const VALID_TELEPHONE_REGEX = /\+\d{2,}\s\d{2,}\s\d{6,}$/ 
+
 exports.getPersonById = {
 
   validate: {
@@ -31,7 +33,7 @@ exports.updatePerson = {
     payload: Joi.object().keys({
         firstname: Joi.string(),
         lastname: Joi.string(),
-        telephone: Joi.string().regex(/\+\d{2,}\s\d{2,}\s\d{6,}$/)
+        telephone: Joi.string().regex(VALID_TELEPHONE_REGEX)
     }).or('firstname', 'lastname', 'telephone')
   },
   handler:  async (request, h) => {
@@ -77,7 +79,7 @@ exports.createPerson = {
     payload: {
         firstname: Joi.string().required(),
         lastname: Joi.string().required(),
-        telephone: Joi.string().regex(/\+\d{2,}\s\d{2,}\s\d{6,}/).required()
+        telephone: Joi.string().regex(VALID_TELEPHONE_REGEX).required()
       }
     },
     handler:  async (request, h) => {
