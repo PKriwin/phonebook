@@ -31,7 +31,7 @@ exports.updatePerson = {
     payload: Joi.object().keys({
         firstname: Joi.string(),
         lastname: Joi.string(),
-        telephone: Joi.string().regex(/\+\d{2,}\s\d{2,}\s\d{6,}/)
+        telephone: Joi.string().regex(/\+\d{2,}\s\d{2,}\s\d{6,}$/)
     }).or('firstname', 'lastname', 'telephone')
   },
   handler:  async (request, h) => {
