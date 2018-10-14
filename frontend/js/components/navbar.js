@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-
 import { Link } from "react-router-dom";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class Navbar extends Component {
 
@@ -14,15 +13,16 @@ export default class Navbar extends Component {
         return (
           <nav className="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-              <Link to='/' className="navbar-item" href="#"><i id="brand-logo" className='fas fa-phone-square'></i>
-                <b>Phonebook</b>
+              <Link to='/' className="navbar-item" href="#">
+                <FontAwesomeIcon icon='phone-square' />
+                <span id='brand-logo'><b>Phonebook</b></span>
               </Link>
             </div>
 
             <div className='navbar-menu'>
               <div className='navbar-end'>
                 <Link to='/create_person' className="navbar-item" href="search">
-                  <i className="fas fa-plus-circle" id="add-entry-menu-item"></i>
+                    <FontAwesomeIcon icon='plus-circle' />
                     <span id='add-entry-menu-item'>Add new entry</span>
                 </Link>
               </div>

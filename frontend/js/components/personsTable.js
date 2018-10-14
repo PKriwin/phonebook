@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class PersonsTable extends Component {
 
@@ -36,7 +36,7 @@ export default class PersonsTable extends Component {
                         <td>{person.telephone}</td>
                         <td>
                           <Link to={'/update_person?id=' + person.id}>
-                            <i className="fas has-text-black fa-edit"></i>
+                            <FontAwesomeIcon className="has-text-black" icon='edit' />
                           </Link>
                         </td>
                       </tr>
