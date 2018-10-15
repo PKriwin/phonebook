@@ -2,6 +2,10 @@
 
 Web application that provides a phonebook
 
+## Live demo
+
+You can find a live demo [here](http://ec2-35-180-174-186.eu-west-3.compute.amazonaws.com:3000)
+
 ## Documentation
 
 You can find the documentation [here](https://github.com/PKriwin/phonebook/wiki)
@@ -51,9 +55,8 @@ Create  a `config.json` file in each specified directory like below:
 }
 ```
 
-/!\
-To gain some time, use the provided `sqlite` database in `/backend/api/test/test.db`
-/!\
+**To gain some time, use the provided `sqlite` database in `/backend/api/test/test.db`**
+
 
 #### backend/assets/web_app_server/config.json
 ```
@@ -86,7 +89,20 @@ in `frontend` directory  run
 $ npm run build
 ```
 
-### 5. Start Servers
+### 5. Database
+Your database must have a table named `person` with the following schema:
+
+```
+CREATE TABLE person (
+	id         INTEGER PRIMARY KEY,
+	firstname  TEXT NOT NULL,
+	lastname   TEXT NOT NULL,
+	telephone  TEXT NOT NULL
+)
+```
+**id must auto increment**
+
+### 6. Start Servers
 Open two terminals, one in `backend/api` and another in `backend/assets/web_app_server` and run in each:
 ```
 $ npm start
