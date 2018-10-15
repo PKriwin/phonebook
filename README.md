@@ -100,7 +100,7 @@ CREATE TABLE person (
 	telephone  TEXT NOT NULL
 )
 ```
-**/!\ id must auto increment /!\**
+**Id must auto increment !**
 **(To gain some time, you can use the provided sqlite database file `test.db` located in /backend/api/test)**
 
 
