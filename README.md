@@ -100,7 +100,9 @@ CREATE TABLE person (
 	telephone  TEXT NOT NULL
 )
 ```
-**id must auto increment**
+**/!\ id must auto increment /!\**
+**(To gain some time, you can use the provided sqlite database file `test.db` located in /backend/api/test)**
+
 
 ### 6. Start Servers
 Open two terminals, one in `backend/api` and another in `backend/assets/web_app_server` and run in each:
