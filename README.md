@@ -27,7 +27,7 @@ $ git clone git@github.com:PKriwin/phonebook.git
 
 https:
 ```
-$ git clone
+$ git clone https://github.com/PKriwin/phonebook.git
 ```
 ### 3. Configure your config files
 
