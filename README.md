@@ -82,14 +82,14 @@ In `backend/api`, `backend/assets/web_app_server`,  `frontend` directories run i
 $ npm install
 ```
 
-### 4. Compile frontend
+### 5. Compile frontend
 
 in `frontend` directory  run
 ```
 $ npm run build
 ```
 
-### 5. Database
+### 6. Database
 Your database must have a table named `person` with the following schema:
 
 ```
@@ -100,11 +100,12 @@ CREATE TABLE person (
 	telephone  TEXT NOT NULL
 )
 ```
-**Id must auto increment !**
+**Id must auto increment!**
+
 **(To gain some time, you can use the provided sqlite database file `test.db` located in /backend/api/test)**
 
 
-### 6. Start Servers
+### 7. Start Servers
 Open two terminals, one in `backend/api` and another in `backend/assets/web_app_server` and run in each:
 ```
 $ npm start
